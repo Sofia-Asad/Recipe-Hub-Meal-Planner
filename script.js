@@ -10,15 +10,18 @@ function showPage(pageId) {
 }
 // 3. Tusaale yar oo lagu raadinayo cuntada (Search Function)
 async function searchRecipes(query) {
-    const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&query=${query}&number=10`;
+    const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&query=${query}&number=12`;
     
     try {
         const response = await fetch(url);
         const data = await response.json();
-        console.log(data.results); // Halkan ka eeg xogta ay soo celiso
+        
+        // Beddel Title-ka marka search la sameeyo
+        document.getElementById('home-title').innerText = `Search Results for: "${query}"`;
+        
         displayRecipes(data.results);
     } catch (error) {
-        console.error("Error:", error);
+        console.error("Cillad:", error);
     }
 }
 // 4. Inaad ku muujiso cuntooyinka shaashadda (Display)
@@ -44,13 +47,15 @@ async function getPopularRecipes() {
         const response = await fetch(url);
         const data = await response.json();
         
-        // Waxaan u baahanahay inaan cinwaanka "Find the Best Recipes" ka dhigno "Popular Recipes"
-        document.querySelector('.search-section h1').innerText = "Popular Recipes";
+        // Kaliya cinwaanka yar beddel
+        document.getElementById('result-title').innerText = "Popular Recipes";
+        
         displayRecipes(data.recipes); 
     } catch (error) {
-        console.error("Cillad ayaa dhacday markii Popular recipes la keenayay:", error);
+        console.error("Cillad:", error);
     }
 }
+
 // Event Listener u samee batoonka Search-ka
 document.getElementById('search-btn').addEventListener('click', () => {
     const query = document.getElementById('search-input').value;
@@ -170,5 +175,5 @@ function removeFromMealPlan(id) {
 window.onload = () => {
     displayFavorites();
     getPopularRecipes();
-    
+
 };
