@@ -121,3 +121,17 @@ nav {
     font-size: 18px;
     color: #333;
 }
+.details-container {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.details-container img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+}
