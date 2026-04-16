@@ -59,3 +59,33 @@ async function getRecipeDetails(id) {
         console.error("Cillad ayaa dhacday:", error);
     }
 }
+// Function-ka ku qoraya xogta bogga labaad (HTML-ka dhexdiisa)
+function displayRecipeFullDetails(recipe) {
+    const detailsDiv = document.getElementById('recipe-full-details');
+    
+    detailsDiv.innerHTML = `
+        <div class="details-container">
+            <img src="${recipe.image}" alt="${recipe.title}">
+            <h2>${recipe.title}</h2>
+            
+            <div class="recipe-meta">
+                <span><i class="fas fa-clock"></i> ${recipe.readyInMinutes} mins</span>
+                <span><i class="fas fa-users"></i> Serves ${recipe.servings}</span>
+            </div>
+
+            <h3>Ingredients</h3>
+            <ul>
+                ${recipe.extendedIngredients.map(ing => `<li>${ing.original}</li>`).join('')}
+            </ul>
+
+            <h3>Instructions</h3>
+            <div class="instructions">
+                ${recipe.instructions || "No instructions available."}
+            </div>
+
+            <button class="save-btn" onclick="saveToMealPlan(${recipe.id}, '${recipe.title}', '${recipe.image}')">
+                <i class="fas fa-heart"></i> Add to My Meal Plan
+            </button>
+        </div>
+    `;
+}
