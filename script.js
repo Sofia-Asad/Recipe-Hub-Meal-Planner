@@ -43,6 +43,15 @@ document.getElementById('search-btn').addEventListener('click', () => {
         searchRecipes(query);
     }
 });
+// Markii Enter la taabto isagoo qofku qoraalka ku dhex jiro
+document.getElementById('search-input').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        const query = document.getElementById('search-input').value;
+        if (query) {
+            searchRecipes(query);
+        }
+    }
+});
 
 // Function-ka keenaya faahfaahinta cuntada marka la gujiyo sawirka
 async function getRecipeDetails(id) {
