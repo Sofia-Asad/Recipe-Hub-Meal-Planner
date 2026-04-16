@@ -108,3 +108,27 @@ function saveToMealPlan(id, title, image) {
     alert("Waa lagu daray My Meal Plan!");
     displayFavorites(); // Cusboonaysii bogga saddexaad
 }
+
+// 2. Inaad soo bandhigto cuntooyinka ku jira bogga saddexaad
+function displayFavorites() {
+    const favoriteResults = document.getElementById('favorite-results');
+    let mealPlan = JSON.parse(localStorage.getItem('myMealPlan')) || [];
+
+    if (mealPlan.length === 0) {
+        favoriteResults.innerHTML = "<p>Ma jiraan cuntooyin kuu dhowrsan hadda.</p>";
+        return;
+    }
+
+    favoriteResults.innerHTML = ''; // Nadiifi markii hore
+    mealPlan.forEach(recipe => {
+        favoriteResults.innerHTML += `
+            <div class="recipe-card">
+                <img src="${recipe.image}" alt="${recipe.title}" onclick="getRecipeDetails(${recipe.id})">
+                <h3>${recipe.title}</h3>
+                <button class="delete-btn" onclick="removeFromMealPlan(${recipe.id})">
+                    <i class="fas fa-trash"></i> Remove
+                </button>
+            </div>
+        `;
+    });
+}
