@@ -8,3 +8,16 @@ function showPage(pageId) {
     // Kan la rabo kaliya tus
     document.getElementById(pageId + '-page').classList.add('active');
 }
+// 3. Tusaale yar oo lagu raadinayo cuntada (Search Function)
+async function searchRecipes(query) {
+    const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&query=${query}&number=10`;
+    
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log(data.results); // Halkan ka eeg xogta ay soo celiso
+        displayRecipes(data.results);
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
