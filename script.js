@@ -36,3 +36,10 @@ function displayRecipes(recipes) {
         resultsDiv.innerHTML += card;
     });
 }
+// Event Listener u samee batoonka Search-ka
+document.getElementById('search-btn').addEventListener('click', () => {
+    const query = document.getElementById('search-input').value;
+    if(query) {
+        searchRecipes(query);
+    }
+});
