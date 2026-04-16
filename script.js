@@ -36,6 +36,21 @@ function displayRecipes(recipes) {
         resultsDiv.innerHTML += card;
     });
 }
+// Function-ka keenaya cuntooyinka Random-ka ah si boggu u buuxsamo
+async function getPopularRecipes() {
+    const url = `https://api.spoonacular.com/recipes/random?apiKey=${API_KEY}&number=12`;
+    
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        // Waxaan u baahanahay inaan cinwaanka "Find the Best Recipes" ka dhigno "Popular Recipes"
+        document.querySelector('.search-section h1').innerText = "Popular Recipes";
+        displayRecipes(data.recipes); 
+    } catch (error) {
+        console.error("Cillad ayaa dhacday markii Popular recipes la keenayay:", error);
+    }
+}
 // Event Listener u samee batoonka Search-ka
 document.getElementById('search-btn').addEventListener('click', () => {
     const query = document.getElementById('search-input').value;
@@ -154,4 +169,6 @@ function removeFromMealPlan(id) {
 // Marka bogga la furo, soo bandhig cuntooyinka keydsan
 window.onload = () => {
     displayFavorites();
+    getPopularRecipes();
+    
 };
