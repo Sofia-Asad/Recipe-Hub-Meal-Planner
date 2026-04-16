@@ -89,3 +89,22 @@ function displayRecipeFullDetails(recipe) {
         </div>
     `;
 }
+
+// 1. Inaad cunto ku dhex keydiso Local Storage
+function saveToMealPlan(id, title, image) {
+    let mealPlan = JSON.parse(localStorage.getItem('myMealPlan')) || [];
+
+    // Hubi haddii cuntadu mar hore ku jirtay
+    const exists = mealPlan.find(item => item.id === id);
+    if (exists) {
+        alert("Cuntadan mar hore ayay ku jirtay Meal Plan-kaaga!");
+        return;
+    }
+
+    // Ku dar liiska
+    mealPlan.push({ id, title, image });
+    localStorage.setItem('myMealPlan', JSON.stringify(mealPlan));
+    
+    alert("Waa lagu daray My Meal Plan!");
+    displayFavorites(); // Cusboonaysii bogga saddexaad
+}
