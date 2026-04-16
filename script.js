@@ -132,3 +132,17 @@ function displayFavorites() {
         `;
     });
 }
+
+// 3. Inaad ka tirtirto cuntada Local Storage
+function removeFromMealPlan(id) {
+    let mealPlan = JSON.parse(localStorage.getItem('myMealPlan')) || [];
+    mealPlan = mealPlan.filter(item => item.id !== id);
+    localStorage.setItem('myMealPlan', JSON.stringify(mealPlan));
+    
+    displayFavorites(); // Cusboonaysii shaashadda
+}
+
+// Marka bogga la furo, soo bandhig cuntooyinka keydsan
+window.onload = () => {
+    displayFavorites();
+};
