@@ -43,3 +43,19 @@ document.getElementById('search-btn').addEventListener('click', () => {
         searchRecipes(query);
     }
 });
+
+// Function-ka keenaya faahfaahinta cuntada marka la gujiyo sawirka
+async function getRecipeDetails(id) {
+    const url = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`;
+    
+    try {
+        const response = await fetch(url);
+        const recipe = await response.json();
+        
+        // Marka xogta la helo, tus bogga Details-ka
+        showPage('details');
+        displayRecipeFullDetails(recipe);
+    } catch (error) {
+        console.error("Cillad ayaa dhacday:", error);
+    }
+}
