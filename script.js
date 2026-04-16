@@ -21,3 +21,18 @@ async function searchRecipes(query) {
         console.error("Error:", error);
     }
 }
+// 4. Inaad ku muujiso cuntooyinka shaashadda (Display)
+function displayRecipes(recipes) {
+    const resultsDiv = document.getElementById('recipe-results');
+    resultsDiv.innerHTML = ''; // Markii hore nadiifi
+
+    recipes.forEach(recipe => {
+        const card = `
+            <div class="recipe-card" onclick="getRecipeDetails(${recipe.id})">
+                <img src="${recipe.image}" alt="${recipe.title}">
+                <h3>${recipe.title}</h3>
+            </div>
+        `;
+        resultsDiv.innerHTML += card;
+    });
+}
